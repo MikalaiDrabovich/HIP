@@ -42,6 +42,10 @@ vector_square(hipLaunchParm lp, T *C_d, const T *A_d, size_t N)
     size_t offset = (hipBlockIdx_x * hipBlockDim_x + hipThreadIdx_x);
     size_t stride = hipBlockDim_x * hipGridDim_x ;
 
+    T* dynamic_array = new float[256];
+    dynamic_array[0] = 0;
+    delete [] dynamic_array;
+	
     for (size_t i=offset; i<N; i+=stride) {
         C_d[i] = A_d[i] * A_d[i];
     }
